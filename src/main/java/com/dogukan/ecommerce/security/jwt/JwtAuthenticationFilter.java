@@ -47,7 +47,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
             if (!activeUserStore.isActive(uid)) {
-                throw new org.springframework.security.authentication.CredentialsExpiredException("Session revoked");
+                filterChain.doFilter(request, response);
+//                throw new org.springframework.security.authentication.CredentialsExpiredException("Session revoked");
+                return;
             }
 
 

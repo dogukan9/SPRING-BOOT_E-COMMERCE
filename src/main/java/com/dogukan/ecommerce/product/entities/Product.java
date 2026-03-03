@@ -43,4 +43,8 @@ public class Product extends AuditableEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+
+    @Version
+    @Column(nullable = false)
+    private Long version;
 }

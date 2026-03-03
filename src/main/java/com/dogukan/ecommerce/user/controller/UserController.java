@@ -24,14 +24,12 @@ public class UserController {
         return ApiResponse.ok("Me", current);
     }
 
-    // ADMIN: create SELLER/USER
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ApiResponse<UserResponse> create(@Valid @RequestBody CreateUserRequest req) {
         return ApiResponse.ok("User created", userService.createByAdmin(req));
     }
 
-    // ADMIN: list/search (custom query)
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ApiResponse<ListWithTotalResponse<UserListItemResponse>> search(
@@ -44,21 +42,18 @@ public class UserController {
         return ApiResponse.ok("Users", userService.searchUsers(q, role, enabled, page, size));
     }
 
-    // ADMIN: get by id
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ApiResponse<UserResponse> getById(@PathVariable Long id) {
         return ApiResponse.ok("User", userService.getById(id));
     }
 
-    // ADMIN: update role
     @PatchMapping("/{id}/role")
     @PreAuthorize("hasRole('ADMIN')")
     public ApiResponse<UserResponse> updateRole(@PathVariable Long id, @Valid @RequestBody UpdateUserRoleRequest req) {
         return ApiResponse.ok("Role is updated", userService.updateRole(id, req));
     }
 
-    // ADMIN: enable/disable
     @PatchMapping("/{id}/enabled")
     @PreAuthorize("hasRole('ADMIN')")
     public ApiResponse<UserResponse> updateEnabled(@PathVariable Long id, @Valid @RequestBody UpdateUserEnabledRequest req) {

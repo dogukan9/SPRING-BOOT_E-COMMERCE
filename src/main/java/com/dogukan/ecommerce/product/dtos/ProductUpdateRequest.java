@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 public record ProductUpdateRequest(
         @NotBlank @Size(min = 2, max = 180) String name,
+        @NotNull Long version,
         @Size(max = 2000) String description,
         @NotNull @DecimalMin(value = "0.01") BigDecimal price,
         @Min(0) int stockQuantity,

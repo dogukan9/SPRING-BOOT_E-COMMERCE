@@ -20,6 +20,7 @@ public class ProductMapper {
     public ProductResponse toResponse(Product p) {
         return new ProductResponse(
                 p.getId(),
+                p.getVersion(),
                 p.getName(),
                 p.getDescription(),
                 p.getPrice(),

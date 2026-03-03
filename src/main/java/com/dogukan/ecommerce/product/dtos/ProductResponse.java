@@ -8,6 +8,7 @@ import java.time.Instant;
 
 public record ProductResponse(
         Long id,
+        Long version,
         String name,
         String description,
         BigDecimal price,

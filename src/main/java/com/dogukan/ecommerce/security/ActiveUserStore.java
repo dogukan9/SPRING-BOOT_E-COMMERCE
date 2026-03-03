@@ -27,7 +27,6 @@ public class ActiveUserStore {
 
     public boolean isActive(Long userId) {
         Boolean exists = redis.hasKey(key(userId));
-        System.out.println(exists);
         return Boolean.TRUE.equals(exists);
     }
 

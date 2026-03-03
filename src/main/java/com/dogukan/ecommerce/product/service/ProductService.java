@@ -104,6 +104,18 @@ public class ProductService {
 
         enforceSellerOwnershipIfNeeded(p, auth);
 
+        if (p.getVersion() == null || !p.getVersion().equals(req.version())) {
+            throw new ApiException(
+                    HttpStatus.CONFLICT,
+                    "STALE_PRODUCT",
+                    "Ürün başka biri tarafından güncellendi. Lütfen sayfayı yenileyip tekrar deneyin.",
+                    Map.of(
+                            "currentVersion", p.getVersion(),
+                            "requestVersion", req.version()
+                    )
+            );
+        }
+
         Category cat = categoryRepository.findById(req.categoryId())
                 .orElseThrow(() -> new ApiException(
                         HttpStatus.NOT_FOUND, "CATEGORY_NOT_FOUND", "Kategori bulunamadı.",
